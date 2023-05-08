@@ -1,7 +1,16 @@
 import {useState} from 'react'
+import './todos.css'
 
 const Todos = () => {
-    const [todos, setTodos] = useState([]);
+    const [todos, setTodos] = useState(() => {
+        const savedTodos = localStorage.getItem('todos');
+        if (savedTodos) {
+          return JSON.parse(savedTodos);
+        } else {
+          return [];
+        }
+      });
+      
     const [newTodo, setNewTodo] = useState('');
   
     const handleSubmit = (e) => {
