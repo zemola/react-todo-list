@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import './todos.css'
 
-const Todos = () => {
+const TodoList = () => {
     const [todos, setTodos] = useState(() => {
         const savedTodos = localStorage.getItem('todos');
         if (savedTodos) {
@@ -28,6 +28,7 @@ const Todos = () => {
       const newTodos = [...todos];
       newTodos.splice(index, 1);
       setTodos(newTodos);
+      localStorage.setItem('todos', JSON.stringify(newTodos));
     };
   
     return (
@@ -54,4 +55,4 @@ const Todos = () => {
     )
 }
 
-export default Todos
+export default TodoList
