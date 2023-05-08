@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import './todos.css'
 
 const Todos = () => {
@@ -10,8 +10,12 @@ const Todos = () => {
           return [];
         }
       });
-      
+
     const [newTodo, setNewTodo] = useState('');
+
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos));
+      }, [todos]);
   
     const handleSubmit = (e) => {
       e.preventDefault();
