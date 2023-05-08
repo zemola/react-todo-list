@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
 function Todo({ todo, index, handleDelete, handleUpdate }) {
-  const [editing, setEditing] = useState(false);
-  const [newTodo, setNewTodo] = useState(todo.text);
-
-  const handleSave = () => {
-    handleUpdate(index, newTodo);
-    setEditing(false);
-  };
-
-  if (editing) {
+    const [editable, setEditable] = useState(false);
+    const [newText, setNewText] = useState('');
+  
+    const handleEdit = () => {
+      setEditable(true);
+      setNewText(todo.text);
+    };
+  
+    const handleSave = () => {
+      handleUpdate(index, newText);
+      setEditable(false);
+    };
+  
     return (
-      <div>
-        <input value={newTodo} onChange={(e) => setNewTodo(e.target.value)} />
-        <button onClick={handleSave}>Save</button>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <span>{todo.text}</span>
-        <button onClick={() => setEditing(true)}>Edit</button>
-        <button onClick={() => handleDelete(index)}>Delete</button>
+      <div className="todo">
+        {editable ? (
+          <input value={newText} onChange={(e) => setNewText(e.target.value)} />
+        ) : (
+          <div>{todo.text}</div>
+        )}
+        <div className="buttons">
+          <button onClick={handleEdit}>Edit</button>
+          <button onClick={() => handleDelete(index)}>Delete</button>
+          {editable && <button onClick={handleSave}>Save</button>}
+        </div>
       </div>
     );
   }
-}
 
-export default Todo;
+  export default Todo;
+  

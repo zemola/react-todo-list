@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import Todo from './Todo';
 import './todos.css'
 
 const TodoList = () => {
@@ -31,8 +32,11 @@ const TodoList = () => {
       localStorage.setItem('todos', JSON.stringify(newTodos));
     };
 
-    const handleUpdate = (index, updatedTodo) => {
+    const handleUpdate = (index, newText) => {
       const newTodos = [...todos];
+      newTodos[index].text = newText;
+      setTodos(newTodos);
+      localStorage.setItem('todos', JSON.stringify(newTodos));
     };
   
     return (
