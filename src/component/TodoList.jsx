@@ -30,6 +30,10 @@ const TodoList = () => {
       setTodos(newTodos);
       localStorage.setItem('todos', JSON.stringify(newTodos));
     };
+
+    const handleUpdate = (index, updatedTodo) => {
+      const newTodos = [...todos];
+    };
   
     return (
       <div className="todo-list">
